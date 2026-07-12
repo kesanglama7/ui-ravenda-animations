@@ -1,0 +1,392 @@
+.page {
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
+  background: #000;
+  color: #fff;
+}
+
+.displayFont {
+  font-family:
+    "Arial Black",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-weight: 900;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hero */
+
+.heroSection {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100svh;
+  min-height: 680px;
+  overflow: hidden;
+  background: #000;
+}
+
+.galleryAnchor {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 140vw;
+  height: 140vh;
+  transform: translate(-50%, -50%);
+}
+
+.gallery {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: clamp(4px, 0.45vw, 9px);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.tile {
+  position: relative;
+  overflow: hidden;
+  background: #111;
+}
+
+.centerTile {
+  z-index: 2;
+}
+
+.tileImage {
+  object-fit: cover;
+  user-select: none;
+  will-change: transform;
+}
+
+.tileShade {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 8%);
+}
+
+/* Fixed menu */
+
+.header {
+  pointer-events: none;
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 120;
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 18px;
+}
+
+.menuButton {
+  pointer-events: auto;
+  display: flex;
+  width: 146px;
+  height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  border: 3px solid rgb(255 255 255 / 28%);
+  background: #050505;
+  padding-inline: 14px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.menuPlus {
+  position: relative;
+  width: 15px;
+  height: 15px;
+}
+
+.menuPlus::before,
+.menuPlus::after {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #fff;
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.menuPlus::before {
+  width: 14px;
+  height: 1px;
+}
+
+.menuPlus::after {
+  width: 1px;
+  height: 14px;
+}
+
+/*
+ * PETS is rendered at its natural large resolution.
+ * GSAP only scales it down.
+ */
+
+.introLogoPosition {
+  position: fixed;
+  left: 18px;
+  top: 20px;
+  z-index: 121;
+  display: block;
+  color: #d7f500;
+  text-decoration: none;
+  transform-origin: top left;
+  will-change: transform, opacity;
+}
+
+.introLogoClip {
+  overflow: hidden;
+}
+
+.introLogo {
+  white-space: nowrap;
+  color: inherit;
+  font-size: clamp(6rem, 17vw, 12rem);
+  font-weight: 900;
+  line-height: 0.72;
+  letter-spacing: -0.055em;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Tagline */
+
+.tagline {
+  position: absolute;
+  right: 3vw;
+  bottom: 7vh;
+  z-index: 50;
+  width: min(28vw, 420px);
+  color: #fff;
+  font-size: clamp(1rem, 2.4vw, 1.5rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  will-change: transform, opacity, filter;
+}
+
+/* Services overlays the pinned hero */
+
+.services {
+  position: relative;
+  z-index: 80;
+  min-height: 120svh;
+  margin-top: -100svh;
+  border-radius: 32px 32px 0 0;
+  background: #efede5;
+  padding: 100px 28px;
+  color: #111;
+  box-shadow: 0 -24px 70px rgb(0 0 0 / 18%);
+}
+
+.servicesLabel {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  opacity: 0.5;
+}
+
+.servicesTitle {
+  margin-top: 40px;
+  font-size: clamp(5rem, 13vw, 13rem);
+  font-weight: 900;
+  line-height: 0.8;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+}
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background: #050505;
+}
+
+/*
+ * Keep the grid background transparent.
+ * The black preloader background should be visible first.
+ */
+.loaderGrid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  gap: 1px;
+  background: transparent;
+}
+
+/*
+ * Important:
+ * Hide every lime cell before JavaScript and GSAP initialize.
+ */
+.loaderCell {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+/*
+ * Hide the percentage interface during the first paint.
+ */
+.loaderInterface {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+
+  will-change: transform, opacity;
+}
+
+.loaderInterfaceInner {
+  display: flex;
+  width: 100%;
+  max-width: 580px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.loaderCounterBox {
+  display: flex;
+  min-width: 78px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.loaderCounter {
+  color: #111111;
+  font-size: 10px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.loaderLongBlock {
+  width: min(42vw, 240px);
+  height: 20px;
+  background: #ffffff;
+}
+
+.loaderSmallBlock {
+  width: 38px;
+  height: 20px;
+  background: #ffffff;
+}
+
+/*
+ * Hide the completed center logo during the first paint.
+ */
+.loaderLogoWrapper {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.75);
+
+  will-change: transform, opacity;
+}
+
+.loaderLogo {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  background: #050505;
+  color: #d7f500;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+@media (max-width: 767px) {
+  .heroSection {
+    min-height: 640px;
+  }
+
+  .galleryAnchor {
+    width: 160vw;
+    height: 140vh;
+  }
+
+  .gallery {
+    gap: 4px;
+  }
+
+  .header {
+    padding: 16px 14px;
+  }
+
+  .menuButton {
+    width: 118px;
+    height: 42px;
+    border-width: 2px;
+  }
+
+  .introLogoPosition {
+    left: 14px;
+    top: 18px;
+  }
+
+  .introLogo {
+    font-size: clamp(7rem, 37vw, 13rem);
+  }
+
+  .tagline {
+    right: 14px;
+    bottom: 28px;
+    width: 210px;
+    font-size: clamp(1.5rem, 7vw, 2.5rem);
+    text-align: right;
+  }
+
+  .services {
+    padding: 70px 18px;
+    border-radius: 22px 22px 0 0;
+  }
+
+  .loaderInterfaceInner {
+    padding-inline: 16px;
+    gap: 8px;
+  }
+
+  .loaderCounterBox {
+    min-width: 66px;
+    height: 24px;
+  }
+
+  .loaderLongBlock {
+    height: 17px;
+  }
+
+  .loaderSmallBlock {
+    width: 28px;
+    height: 17px;
+  }
+}
